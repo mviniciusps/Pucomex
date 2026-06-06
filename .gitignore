@@ -1,0 +1,18 @@
+# Ignore everything
+*
+
+# Keep gitignore itself
+!.gitignore
+
+# Keep Database folder
+!Database/
+!Database/**
+
+# Ignore SQL Server backups
+*.bak
+*.trn
+
+# Visual Studio
+.vs/
+bin/
+obj/
