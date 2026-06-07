@@ -30,7 +30,7 @@ Objective: Criaçao das tabelas
 Date	 : 06/06/2026
 ------------------------------------------------------------*/
 --------------------------------------------------------------------------
--- Tabela: tStates
+-- Tabela: tState
 --------------------------------------------------------------------------
 CREATE SEQUENCE seqiStateId
 AS INT
@@ -51,5 +51,30 @@ CREATE TABLE tState
 
 	CONSTRAINT UQ_State_Code
 		UNIQUE (cCode)
+);
+GO
+
+--------------------------------------------------------------------------
+-- Tabela: tCity
+--------------------------------------------------------------------------
+CREATE SEQUENCE seqiCityId
+AS INT
+START WITH 1
+INCREMENT BY 1;
+GO
+
+CREATE TABLE tCity
+(
+	iCityId INT NOT NULL
+		DEFAULT NEXT VALUE FOR seqiCityId,
+
+	iStateId INT NOT NULL,
+	cName VARCHAR(100) NOT NULL,
+
+	CONSTRAINT PK_CITY_ID
+		PRIMARY KEY (iCityId),
+
+	CONSTRAINT FK_CITY_STATE
+		FOREIGN KEY (iStateId) REFERENCES tState (iStateid)
 );
 GO
