@@ -26,11 +26,11 @@ GO
 /*------------------------------------------------------------
 Author   : Marcus Paiva
 DataBase : PUCOMEX
-Objective: Criaçao das tabelas
+Objective: Tables creation
 Date	 : 06/06/2026
 ------------------------------------------------------------*/
 --------------------------------------------------------------------------
--- Tabela: tState
+-- Table: tState
 --------------------------------------------------------------------------
 CREATE SEQUENCE seqiStateId
 AS INT
@@ -55,7 +55,7 @@ CREATE TABLE tState
 GO
 
 --------------------------------------------------------------------------
--- Tabela: tCity
+-- Table: tCity
 --------------------------------------------------------------------------
 CREATE SEQUENCE seqiCityId
 AS INT
@@ -76,5 +76,36 @@ CREATE TABLE tCity
 
 	CONSTRAINT FK_CITY_STATE
 		FOREIGN KEY (iStateId) REFERENCES tState (iStateid)
+);
+GO
+
+--------------------------------------------------------------------------
+-- Table: tCustomer
+--------------------------------------------------------------------------
+CREATE SEQUENCE seqiCostumerId
+AS INT
+START WITH 1
+INCREMENT BY 1;
+GO
+
+CREATE TABLE tCustomer
+(
+	iCustomerId INT NOT NULL,
+	DEFAULT NEXT VALUE FOR seqiCostumerId,
+
+	cTaxId VARCHAR(14) NOT NULL,
+	cLegalName VARCHAR(200) NOT NULL,
+
+	cAdress VARCHAR(300) NULL,
+	iCityId INT NOT NULL,
+
+	CONSTRAINT PK_CUSTOMER_ID
+		PRIMARY KEY (iCustomerId),
+
+	CONSTRAINT UQ_TAX_ID
+		UNIQUE (cTaxId),
+
+	CONSTRAINT FK_CUSTOMER_CITY
+		FOREIGN KEY (iCityId) REFERENCES tCity (iCityId)
 );
 GO
